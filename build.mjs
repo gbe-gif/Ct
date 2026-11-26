@@ -29,6 +29,14 @@ for (const [slug,title] of pages) {
   const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${name}</title><meta name="description" content="차밍고구마의 재테크 소모임 승전공. 일요일 오전 열 시, 서초 801호에서 만나는 사람들의 이야기."><meta property="og:type" content="website"><meta property="og:title" content="${name}">${url?`<link rel="canonical" href="${url}"><meta property="og:url" content="${url}">`:''}<link rel="stylesheet" href="${base}style.css"></head><body><header><a href="${base}"><b>승전공</b><span>소모임 기록실</span></a><small>서울 · 서초</small></header><main>${body}</main><nav aria-label="페이지 이동">${nav}</nav></body></html>`
   const dir = path.join(dest,slug)
   await mkdir(dir,{recursive:true})
-  const chat = `<dialog aria-labelledby="room-name"><div class="room"><div class="room-head"><span class="avatar" aria-hidden="true">승</span><div><small>차밍고구마 · 소모임 채팅</small><h2 id="room-name">승전공 단체방</h2></div></div><div class="messages" role="log" aria-live="polite"><small>우혁</small><p>어서 오세요. 모임 소개부터 보실래요?</p></div><form><label for="draft">당신의 메시지</label><div class="composer"><output id="draft">모임 소개를 보고 싶어요.</output><button type="submit">전송</button></div></form></div></dialog>`
+  const chat = `<dialog aria-labelledby="room-name"><div class="room">
+    <div class="room-head"><span class="seed" aria-hidden="true"></span><div><small>차밍고구마 · 서초 생활권</small><h2 id="room-name">승리 전략 공부해요</h2></div><span class="members">5명</span></div>
+    <div class="messages" role="log" aria-live="polite"><div class="room-date">11월 26일 목요일</div>
+      <small>이혼소송전문 · 방장</small><time datetime="2026-11-26T20:47:00+09:00">20:47</time>
+      <p>다들 오셨네요. 일요일 열 시, 서초 공유오피스 801호에서 뵙죠.</p>
+      <p>자, 이제 본격적으로 반격해 볼까요?</p>
+    </div>
+    <form><label for="draft">당신의 메시지</label><div class="composer"><output id="draft">네. 저도 준비됐어요.</output><button type="submit">전송</button></div></form>
+  </div></dialog>`
   await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+`<script src="${base}chat.js" defer></script></body>`))
 }
