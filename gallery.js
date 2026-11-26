@@ -27,7 +27,9 @@ if (passwordDialog) {
     const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('')
     if (!passwordDialog.open) return
     if (hash !== expectedHash) {
-      status.textContent = '비밀번호가 일치하지 않아요. 다시 입력해주세요.'
+      status.textContent = document.documentElement.lang === 'en'
+        ? 'That password does not match. Please try again.'
+        : '비밀번호가 일치하지 않아요. 다시 입력해주세요.'
       input.focus()
       input.select()
       return

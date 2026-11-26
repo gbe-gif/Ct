@@ -18,14 +18,14 @@ if (!entered && typeof room.showModal === 'function') {
   })
   room.querySelector('form').addEventListener('submit', event => {
     event.preventDefault()
-    const button = room.querySelector('button')
+    const button = room.querySelector('button[type="submit"]')
     if (button.disabled) return
     button.disabled = true
     const bubble = document.createElement('p')
     bubble.className = 'sent'
     bubble.textContent = document.querySelector('#draft').textContent
     room.querySelector('.messages').append(bubble)
-    button.textContent = '전송됨'
+    button.textContent = document.documentElement.lang === 'en' ? 'Sent' : '전송됨'
     setTimeout(() => { if (room.open) enter() }, 550)
   })
 }
