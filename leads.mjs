@@ -2,6 +2,7 @@ const profiles = [
   {
     id: 'woohyeok',
     name: '차우혁',
+    image: 'https://gbe88.uk/3/Ct/%EC%9A%B0%ED%98%81.webp',
     role: '이혼·상속을 전문으로 하는 법무법인 날개의 대표 변호사',
     badges: ['37세', '남성', '186cm', '11월 8일', 'ENTJ', '이혼소송전문'],
     groups: [
@@ -31,6 +32,7 @@ const profiles = [
   {
     id: 'haegyeom',
     name: '박해겸',
+    image: 'https://gbe88.uk/3/Ct/%ED%95%B4%EA%B2%B8.webp',
     role: 'AI 비전·반도체 검사장비 기업의 연구개발 테크 리드',
     badges: ['31세', '남성', '182cm', '1월 24일', 'INTP'],
     groups: [
@@ -61,6 +63,7 @@ const profiles = [
   {
     id: 'taeo',
     name: '황보태오',
+    image: 'https://gbe88.uk/3/Ct/%ED%83%9C%EC%98%A4.webp',
     role: '정상급 아이돌과 해외 팝스타가 찾는 프리랜서 안무가 겸 퍼포먼스 디렉터',
     badges: ['29세', '남성', '187cm', '7월 29일', 'ESFP'],
     groups: [
@@ -90,6 +93,7 @@ const profiles = [
   {
     id: 'henrik',
     name: '김헨릭',
+    image: 'https://gbe88.uk/3/Ct/%ED%97%A8%EB%A6%AD.webp',
     role: '미슐랭 2스타 파인다이닝 솔레의 총괄 수셰프',
     badges: ['36세', '남성', '196cm', '5월 12일', 'ISFJ'],
     groups: [

@@ -2,6 +2,7 @@ const profiles = [
   {
     id: 'iyeon',
     name: '이연',
+    image: 'https://gbe88.uk/3/Ct/%EC%9D%B4%EC%97%B0.webp',
     badges: ['32세', '여성', '168cm', 'ESTJ'],
     facts: [
       '세무사이자 차우혁의 배우자.',
@@ -12,6 +13,7 @@ const profiles = [
   {
     id: 'jaeu',
     name: '재우',
+    image: 'https://gbe88.uk/3/Ct/%EC%9E%AC%EC%9A%B0.webp',
     badges: ['26세', '남성', '188cm'],
     facts: [
       '금발과 검은 눈, 햇볕에 그을린 피부의 헬스 트레이너.',
@@ -21,6 +23,7 @@ const profiles = [
   {
     id: 'jiyu',
     name: '지유',
+    image: 'https://gbe88.uk/3/Ct/%EC%A7%80%EC%9C%A0.webp',
     badges: ['30세', '여성', '165cm', 'ESFP'],
     facts: [
       '박해겸의 배우자로, 집안일을 전담.',
@@ -32,6 +35,7 @@ const profiles = [
   {
     id: 'duhyeon',
     name: '두현',
+    image: 'https://gbe88.uk/3/Ct/%EB%91%90%ED%98%84.webp',
     badges: ['33세', '남성', '178cm', 'ENFJ'],
     facts: [
       '백발과 금빛 눈의 작곡가 겸 프로듀서.',
@@ -41,6 +45,7 @@ const profiles = [
   {
     id: 'yeseol',
     name: '예설',
+    image: 'https://gbe88.uk/3/Ct/%EC%98%88%EC%84%A4.webp',
     badges: ['25세', '여성', '165cm'],
     facts: [
       '분홍색 머리와 푸른 눈, 가느다란 체형의 전직 아이돌.',
@@ -50,6 +55,7 @@ const profiles = [
   {
     id: 'jeongwon',
     name: '정원',
+    image: 'https://gbe88.uk/3/Ct/%EC%A0%95%EC%9B%90.webp',
     badges: ['34세', '여성', '172cm', 'ISTJ'],
     facts: [
       '정리정돈 상담사 겸 유튜버. 짧은 검은 머리와 초록색 눈, 가느다란 체형.',
@@ -62,6 +68,7 @@ const profiles = [
   {
     id: 'roha',
     name: '로하',
+    image: 'https://gbe88.uk/3/Ct/%EB%A1%9C%ED%95%98.webp',
     badges: ['생후 11개월', '남성'],
     facts: [
       '정원의 아들. 검은 머리와 검은 눈, 까무잡잡한 피부.',
