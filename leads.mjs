@@ -24,6 +24,7 @@ const profiles = [
       '마음이 정해지면 먼저 관계를 진전시키며, 자신을 믿고 맡겨 주는 태도에 끌림.',
       '둘만 있을 때 다정함을 드러냄. 앞장서고 싶은 마음과 상대가 스스로 결정할 여지를 주려는 마음 사이에서 고민.',
     ],
+    adultType: '마스터',
     adult: [
       '합의한 규칙과 과제를 바탕으로 주도권을 쥐며, 짧고 단호한 지시로 분위기를 이끄는 편.',
       '둘이 정한 한계 안에서 반응을 살피고, 역할을 마친 뒤에는 다정하게 상대의 상태를 확인.',
@@ -55,6 +56,7 @@ const profiles = [
       '상대에게 필요한 일을 챙기는 것으로 마음을 표현. 노력을 알아봐 주는 말에 유난히 힘을 얻는 편.',
       '도움이 필요한 순간과 자신을 좋아해서 곁에 두고 싶은 순간을 구분하는 데 서툶.',
     ],
+    adultType: '서번트',
     adult: [
       '합의한 역할 안에서 구체적으로 부탁받은 일을 세심히 해내고, 상대의 반응에 맞춰 조율하는 편.',
       '기대에 못 미쳤다고 느끼면 사과가 앞섬. 무엇이 좋았는지 구체적으로 알려 주는 말에 안도.',
@@ -85,6 +87,7 @@ const profiles = [
       '장난을 재치 있게 받아치는 상대에게 끌림. 진심을 털어놓는 데는 서툴지만 관계를 떳떳하게 인정받고 싶어 함.',
       '지금까지 남성과만 연애해 왔으며, 여자인 당신에게 마음이 생기면 그 마음을 인정하기까지 시간이 걸리는 편.',
     ],
+    adultType: '브랫 바텀',
     adult: [
       '서로 정한 역할 안에서도 쉽게 순순해지지 않고, 가벼운 말싸움을 즐기다 상대를 믿으면 주도권을 맡기는 편.',
       '자세나 거울에 비친 모습처럼 시각적인 연출을 즐김. 장난을 걸던 태도에서 원하는 것을 솔직히 청하는 태도로 바뀌기도 함.',
@@ -116,6 +119,7 @@ const profiles = [
       '상대의 감정을 세심하게 살피고 기다릴 줄 알지만, 중요한 대화에서는 필요한 말을 분명히 전하는 편.',
       '솔직한 관계를 바라면서도 막상 진실을 듣게 되는 순간을 두려워함.',
     ],
+    adultType: '훈육형 대디돔',
     adult: [
       '부드러운 말투로 합의한 규칙을 짚어 주고, 불편함을 숨기지 않고 말해 주는 태도를 중요하게 여김.',
       '요리에서 가져온 향과 온도, 질감으로 분위기를 만들며 상대의 반응에 맞춰 속도를 조절. 마무리에는 몸과 마음이 편안해지도록 돌봄.',
@@ -125,7 +129,7 @@ const profiles = [
 
 export function renderLeads(list) {
   const index = profiles.map(({ id, name }) => `<a href="#${id}">${name}</a>`).join('')
-  const cards = profiles.map(({ id, name, role, badges, groups, romance, adult, image }) => `
+  const cards = profiles.map(({ id, name, role, badges, groups, romance, adultType, adult, image }) => `
     <article class="profile" id="${id}" aria-labelledby="${id}-name">
       <div class="profile-identity">
         ${image
@@ -142,6 +146,7 @@ export function renderLeads(list) {
           ${list(...romance)}
           <details class="profile-adult">
             <summary><span class="profile-rating">19+ 언세이프</span> 성인 관계</summary>
+            <span class="profile-rating profile-adult-type">${adultType}</span>
             ${list(...adult)}
           </details>
         </div>

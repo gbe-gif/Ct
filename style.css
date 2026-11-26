@@ -143,6 +143,13 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
   color: white;
 }
 
+.profile-adult .profile-adult-type {
+  margin-bottom: 4px;
+  background: #f1e4e5;
+  color: var(--wine);
+  font-weight: 700;
+}
+
 @media (max-width: 700px) {
   .profile {
     grid-template-columns: 1fr;
