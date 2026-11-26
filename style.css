@@ -257,10 +257,15 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
   font: 500 .83rem "Pyeojin Gothic", sans-serif;
 }
 .languages [aria-current] { background: var(--wine); color: white; }
-.languages :disabled { color: #786d72; }
 header .languages { margin-inline: 10px auto; flex-shrink: 0; }
 .room .languages { display: flex; width: fit-content; margin-bottom: 10px; }
-html[lang="en"] { word-break: normal; }
+html[lang="en"], html[lang="ja"] { word-break: normal; }
+html[lang="ja"] {
+  --heading-font: "Paperlogy", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  font-family: "Pyeojin Gothic", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  line-break: strict;
+}
+html[lang="ja"] .hero h1 { font-size: clamp(2.1rem, 5vw, 4.8rem); }
 html[lang="en"] .cover strong { font-size: clamp(1rem, 2.4vw, 2rem); letter-spacing: 0; }
 @media (max-width: 650px) {
   header > small { display: none; }
@@ -268,6 +273,7 @@ html[lang="en"] .cover strong { font-size: clamp(1rem, 2.4vw, 2rem); letter-spac
   header > a { gap: 6px; flex-wrap: wrap; }
   header > a span { padding-left: 6px; }
   html[lang="en"] header b { font-size: 1.12rem; }
+  html[lang="ja"] header b { font-size: 1.15rem; }
 }
 
 .gallery section {

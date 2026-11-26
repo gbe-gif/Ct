@@ -25,7 +25,7 @@ if (!entered && typeof room.showModal === 'function') {
     bubble.className = 'sent'
     bubble.textContent = document.querySelector('#draft').textContent
     room.querySelector('.messages').append(bubble)
-    button.textContent = document.documentElement.lang === 'en' ? 'Sent' : '전송됨'
+    button.textContent = { ko: '전송됨', en: 'Sent', ja: '送信済み' }[document.documentElement.lang]
     setTimeout(() => { if (room.open) enter() }, 550)
   })
 }

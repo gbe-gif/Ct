@@ -4,7 +4,7 @@ import { renderLeads } from './leads.mjs'
 import { renderSupport } from './support.mjs'
 import { renderSpousePicker } from './spouses.mjs'
 import { renderGallery } from './gallery.mjs'
-import { englishPage, languageSwitch } from './locale.mjs'
+import { localePaths, localizePage, languageSwitch } from './locale.mjs'
 
 const segments = (process.env.BASE_PATH || '').split('/').filter(Boolean).map(decodeURIComponent)
 if (segments.some(s => !/^[\p{L}\p{N}_-]+$/u.test(s))) throw Error('BASE_PATH에는 문자, 숫자, 밑줄, 하이픈만 사용해 주세요.')
@@ -35,8 +35,8 @@ const bodies = {
   'leads/': shared + renderLeads(list),
   'support/': shared + renderSupport(list),
 }
-for (const locale of ['ko', 'en']) {
-  const siteBase = locale === 'en' ? base + 'en/' : base
+for (const [locale, localePath] of Object.entries(localePaths)) {
+  const siteBase = base + localePath
   for (const [slug,title] of [...pages, ['gallery/unsafe/', '언세이프 수록 이미지']]) {
     const url = origin && new URL(siteBase+slug,origin).href
     const name = title+' · 승전공'
@@ -44,7 +44,7 @@ for (const locale of ['ko', 'en']) {
     const navSlug = slug === 'gallery/unsafe/' ? 'gallery/' : slug
     const nav = pages.map(([s,t,icon])=>`<a href="${siteBase+s}" ${navSlug===s?'aria-current="page"':''}><span aria-hidden="true">${icon}</span>${t}</a>`).join('')
     const html = `<!doctype html><html lang="${locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${name}</title><meta name="description" content="차밍고구마의 재테크 소모임 승전공. 일요일 오전 열 시, 서초 801호에서 만나는 사람들의 이야기."><meta property="og:type" content="website"><meta property="og:title" content="${name}">${url?`<link rel="canonical" href="${url}"><meta property="og:url" content="${url}">`:''}<link rel="stylesheet" href="${base}style.css"></head><body><header><a href="${siteBase}"><b>승전공</b><span>소모임 기록실</span></a><!--languages--><small>서울 · 서초</small></header><main>${body}</main><nav aria-label="페이지 이동">${nav}</nav></body></html>`
-    const dir = path.join(dest,locale === 'en' ? 'en' : '',slug)
+    const dir = path.join(dest,localePath,slug)
     await mkdir(dir,{recursive:true})
     const chat = `<dialog aria-labelledby="room-name"><div class="room">
       <div class="room-head"><span class="seed" aria-hidden="true"></span><div><small>차밍고구마 · 서초 생활권</small><h2 id="room-name">승리 전략 공부해요</h2></div><span class="members">5명</span></div>
@@ -58,7 +58,7 @@ for (const locale of ['ko', 'en']) {
     const pageScript = { '': 'spouse-picker.js', 'gallery/': 'gallery.js', 'gallery/unsafe/': 'gallery.js' }[slug]
     const script = pageScript ? `<script src="${base}${pageScript}" defer></script>` : ''
     const document = html.replace('</body>',chat+`<script src="${base}chat.js" defer></script>`+script+'</body>')
-    const localized = locale === 'en' ? englishPage(document) : document
+    const localized = localizePage(document, locale)
     await writeFile(path.join(dir,'index.html'),localized.replaceAll('<!--languages-->', languageSwitch(base, slug, locale)))
   }
 }
