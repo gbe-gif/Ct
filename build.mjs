@@ -1,4 +1,4 @@
-import { mkdir, copyFile, writeFile, rm } from 'node:fs/promises'
+import { mkdir, copyFile, cp, writeFile, rm } from 'node:fs/promises'
 import path from 'node:path'
 
 const segments = (process.env.BASE_PATH || '').split('/').filter(Boolean).map(decodeURIComponent)
@@ -21,6 +21,7 @@ const dest = path.join('dist',...segments)
 await mkdir(dest,{recursive:true})
 await copyFile('style.css',path.join(dest,'style.css'))
 await copyFile('chat.js',path.join(dest,'chat.js'))
+await cp('fonts',path.join(dest,'fonts'),{recursive:true})
 for (const [slug,title] of pages) {
   const url = origin && new URL(base+slug,origin).href
   const name = title+' · 승전공'
