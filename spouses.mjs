@@ -99,7 +99,7 @@ const spouses = [
     ],
   },
   {
-    name: '테오 모레이라', age: 34, country: '브라질', job: '풋살 코치',
+    name: '마테오 모레이라', age: 34, country: '브라질', job: '풋살 코치',
     title: '이번 한 판만 더 뛰면 안 될까.',
     details: [
       '183cm·튼튼한 허벅지·짧게 민 흑발·짙은 눈썹·오른쪽 무릎의 수술 자국.',

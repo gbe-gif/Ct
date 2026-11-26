@@ -151,8 +151,21 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
 
   .profile-portrait {
     width: min(62%, 230px);
+    margin-inline: auto;
   }
 }
+
+.support-profile .profile-details h2 {
+  margin-top: 0;
+}
+
+@media (min-width: 701px) {
+  .support-profile {
+    grid-template-columns: minmax(190px, 260px) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
 .support-profile .profile-placeholder {
   aspect-ratio: 1 / 1;
 }

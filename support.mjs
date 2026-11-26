@@ -81,14 +81,12 @@ export function renderSupport(list) {
   const index = profiles.map(({ id, name }) => `<a href="#${id}">${name}</a>`).join('')
   const cards = profiles.map(({ id, name, badges, facts, safe, adult, spoiler, image }) => `
     <article class="profile support-profile" id="${id}" aria-labelledby="${id}-name">
-      <div class="profile-identity">
-        ${image
-          ? `<img class="profile-portrait" src="${image}" alt="${name} 프로필" width="400" height="400" loading="lazy">`
-          : '<div class="profile-portrait profile-placeholder">프로필 사진 준비 중</div>'}
+      ${image
+        ? `<img class="profile-portrait" src="${image}" alt="${name} 프로필" width="400" height="400" loading="lazy">`
+        : '<div class="profile-portrait profile-placeholder">프로필 사진 준비 중</div>'}
+      <div class="profile-details profile-identity">
         <h2 id="${id}-name">${name}</h2>
         <ul class="profile-badges" aria-label="기본 정보">${badges.map(badge => `<li>${badge}</li>`).join('')}</ul>
-      </div>
-      <div class="profile-details">
         ${list(...facts)}
         ${safe ? `<div class="profile-relationship">
           <h3><span class="profile-rating">세이프</span> 버전 설정</h3>
