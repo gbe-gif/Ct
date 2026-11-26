@@ -161,3 +161,43 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
   background: #e9dfec;
   color: #492d4e;
 }
+.spouse-picker {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.spouse-action, .spouse-heading button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--wine);
+  border-radius: 6px;
+  background: var(--wine);
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+#spouse-dialog {
+  width: min(92vw, 640px);
+  max-height: 85dvh;
+  padding: 18px;
+  overscroll-behavior: contain;
+}
+
+.spouse-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.spouse-heading h2 { margin: 0; }
+.spouse-heading button { white-space: nowrap; }
+.spouse-card { border-top: 1px solid var(--rule); }
+.spouse-card summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
+.spouse-card summary span { color: #604952; }
+.spouse-card[open] { padding-bottom: 12px; }
+.spouse-card ul { margin-bottom: 10px; }
+.spouse-card textarea { width: 100%; margin-top: 8px; font: inherit; }
+.spouse-status { margin: 6px 0 0; color: var(--wine); }
+.spouse-status:empty { margin: 0; }

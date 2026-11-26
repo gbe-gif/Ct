@@ -1,4 +1,4 @@
-const room = document.querySelector('dialog')
+const room = document.querySelector('dialog[aria-labelledby="room-name"]')
 const sessionKey = 'seungjeongong:entered:' + new URL('.', document.currentScript.src).pathname
 let entered = false
 try { entered = sessionStorage.getItem(sessionKey) === 'yes' } catch {}

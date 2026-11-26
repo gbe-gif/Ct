@@ -2,6 +2,7 @@ import { mkdir, copyFile, cp, writeFile, rm } from 'node:fs/promises'
 import path from 'node:path'
 import { renderLeads } from './leads.mjs'
 import { renderSupport } from './support.mjs'
+import { renderSpousePicker } from './spouses.mjs'
 
 const segments = (process.env.BASE_PATH || '').split('/').filter(Boolean).map(decodeURIComponent)
 if (segments.some(s => !/^[\p{L}\p{N}_-]+$/u.test(s))) throw Error('BASE_PATH에는 문자, 숫자, 밑줄, 하이픈만 사용해 주세요.')
@@ -15,6 +16,7 @@ const shared = '<div class="label">차밍고구마 &nbsp;/&nbsp; 동네 소모�
 const hero = `<div class="hero"><div>${shared}<h1>승리 전략<br><em>공부해요.</em></h1>${list('동네 재테크 스터디라는 이름 아래 모인 배우자 외도 피해자들.')}</div><div class="folder" aria-hidden="true"><div class="sheet"><b>정기 모임 기록</b><i></i><i></i></div><div class="cover"><span>서초 · 소모임 자료철</span><strong>승전공</strong><small>개설일 &nbsp; 2026.11.01</small></div></div></div>`
 const world = hero + '<div class="columns"><div>' +
 section('소모임의 속사정', list('2026년 11월 1일, 우혁이 차밍고구마에 개설한 재테크 공부 모임.', '해겸, 태오, 헨릭, 그리고 당신이 모여 이혼에 대비하는 자리.', '배우자나 전 연인에게 관계 파탄의 책임이 있음을 뒷받침할 자료 수집.', '재산분할에서 자기 몫을 지키고 금전 손실을 줄이면서 충분한 위자료를 받는 것이 공동의 목표.')) +
+renderSpousePicker() +
 section('차밍고구마',list('사는 동네를 기준으로 이웃과 중고 물건을 거래하고 생활 정보를 나누는 지역 플랫폼.', '필요한 생활 서비스를 맡길 전문가를 찾고, 개업한 전문가는 동네에 이름을 알리는 곳.', '관심사가 맞는 이웃끼리 소모임을 꾸리는 공간.', '이용 매너를 당도(°Bx)로 나타내며, 밤고구마·호박고구마·꿀고구마 등의 칭호를 사용.')) + '</div><aside>' +
 section('정기 모임','<div class="meeting">일요일 <b>10:00</b></div>'+list('매주 서초 공유오피스 801호에서 집합.', '가져온 증거를 서류로 정리하고 우혁에게 법률 자문을 받는 시간.')) +
 section('주중 번개',list('시간이 맞는 회원들이 주중에 모이는 비정기 만남으로, 보통 한두 차례 진행.', '제안자의 기분에 따라 도심 나들이, 체험, 오락, 운동 중 활동을 선택.', '서로의 근황을 듣고 쌓인 스트레스를 푸는 자리.'))+'</aside></div>'
@@ -23,6 +25,7 @@ const dest = path.join('dist',...segments)
 await mkdir(dest,{recursive:true})
 await copyFile('style.css',path.join(dest,'style.css'))
 await copyFile('chat.js',path.join(dest,'chat.js'))
+await copyFile('spouse-picker.js',path.join(dest,'spouse-picker.js'))
 await cp('fonts',path.join(dest,'fonts'),{recursive:true})
 const bodies = {
   '': world,
@@ -47,5 +50,6 @@ for (const [slug,title] of pages) {
     </div>
     <form><label for="draft">당신의 메시지</label><div class="composer"><output id="draft">네. 저도 준비됐어요.</output><button type="submit">전송</button></div></form>
   </div></dialog>`
-  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+`<script src="${base}chat.js" defer></script></body>`))
+  const pickerScript = slug ? '' : `<script src="${base}spouse-picker.js" defer></script>`
+  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+pickerScript+`<script src="${base}chat.js" defer></script></body>`))
 }
