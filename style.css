@@ -196,6 +196,7 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
 .spouse-card { border-top: 1px solid var(--rule); }
 .spouse-card summary { min-height: 44px; padding: 12px 0; cursor: pointer; }
 .spouse-card summary span { color: #604952; }
+.spouse-identity { display: block; margin-top: 4px; }
 .spouse-card[open] { padding-bottom: 12px; }
 .spouse-card ul { margin-bottom: 10px; }
 .spouse-card textarea { width: 100%; margin-top: 8px; font: inherit; }
