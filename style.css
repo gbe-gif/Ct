@@ -175,8 +175,22 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
   color: #492d4e;
 }
 .spouse-picker {
-  padding: 18px 0;
-  border-bottom: 1px solid var(--rule);
+  margin: 16px 0 0;
+  padding: 22px clamp(16px, 4vw, 28px);
+  border: 1px solid #dbc5c9;
+  border-inline-start: 4px solid var(--wine);
+  border-radius: 8px;
+  background: #f3e9e9;
+}
+
+.spouse-picker h2 {
+  margin-bottom: 8px;
+  color: var(--wine);
+}
+
+.spouse-picker p {
+  margin: 0 0 14px;
+  line-height: 1.6;
 }
 
 .spouse-action, .spouse-heading button {

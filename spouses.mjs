@@ -124,9 +124,11 @@ export function renderSpousePicker() {
       <p class="spouse-status" role="status"></p>
     </details>`
   }).join('')
-  return `<div class="spouse-picker">
+  return `<section class="spouse-picker" aria-labelledby="spouse-picker-title">
+    <h2 id="spouse-picker-title">배우자 설정 짜기 힘드시다면!</h2>
+    <p>열 명의 배우자 후보 중 한 명을 골라 유저노트에 복사.</p>
     <button type="button" class="spouse-action" id="open-spouses" aria-haspopup="dialog">내 쓰레기 배우자 고르기</button>
-  </div>
+  </section>
   <dialog id="spouse-dialog" aria-labelledby="spouse-title">
     <div class="spouse-heading">
       <h2 id="spouse-title">내 쓰레기 배우자 고르기</h2>
