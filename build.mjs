@@ -3,6 +3,7 @@ import path from 'node:path'
 import { renderLeads } from './leads.mjs'
 import { renderSupport } from './support.mjs'
 import { renderSpousePicker } from './spouses.mjs'
+import { renderGallery } from './gallery.mjs'
 
 const segments = (process.env.BASE_PATH || '').split('/').filter(Boolean).map(decodeURIComponent)
 if (segments.some(s => !/^[\p{L}\p{N}_-]+$/u.test(s))) throw Error('BASE_PATH에는 문자, 숫자, 밑줄, 하이픈만 사용해 주세요.')
@@ -26,12 +27,13 @@ await mkdir(dest,{recursive:true})
 await copyFile('style.css',path.join(dest,'style.css'))
 await copyFile('chat.js',path.join(dest,'chat.js'))
 await copyFile('spouse-picker.js',path.join(dest,'spouse-picker.js'))
+await copyFile('gallery.js',path.join(dest,'gallery.js'))
 await cp('fonts',path.join(dest,'fonts'),{recursive:true})
 const bodies = {
   '': world,
   'leads/': shared + renderLeads(list),
   'support/': shared + renderSupport(list),
-  'gallery/': shared + '<h1>수록 이미지</h1>' + section('공개 예정', list('수록 이미지 공개 준비 중.')),
+  'gallery/': shared + renderGallery(),
 }
 for (const [slug,title] of pages) {
   const url = origin && new URL(base+slug,origin).href
@@ -50,6 +52,7 @@ for (const [slug,title] of pages) {
     </div>
     <form><label for="draft">당신의 메시지</label><div class="composer"><output id="draft">네. 저도 준비됐어요.</output><button type="submit">전송</button></div></form>
   </div></dialog>`
-  const pickerScript = slug ? '' : `<script src="${base}spouse-picker.js" defer></script>`
-  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+pickerScript+`<script src="${base}chat.js" defer></script></body>`))
+  const pageScript = { '': 'spouse-picker.js', 'gallery/': 'gallery.js' }[slug]
+  const script = pageScript ? `<script src="${base}${pageScript}" defer></script>` : ''
+  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+script+`<script src="${base}chat.js" defer></script></body>`))
 }
