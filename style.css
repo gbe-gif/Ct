@@ -259,13 +259,30 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
 .languages [aria-current] { background: var(--wine); color: white; }
 header .languages { margin-inline: 10px auto; flex-shrink: 0; }
 .room .languages { display: flex; width: fit-content; margin-bottom: 10px; }
-html[lang="en"], html[lang="ja"] { word-break: normal; }
+html[lang="en"] { word-break: normal; }
 html[lang="ja"] {
   --heading-font: "Paperlogy", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
   font-family: "Pyeojin Gothic", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
   line-break: strict;
 }
+html[lang="ja"] body { word-break: normal; overflow-wrap: anywhere; }
 html[lang="ja"] .hero h1 { font-size: clamp(2.1rem, 5vw, 4.8rem); }
+html[lang="ja"] .cover strong {
+  max-width: 100%;
+  font-size: clamp(1.15rem, 3vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: .02em;
+}
+html[lang="ja"] .cover small {
+  font-size: clamp(.68rem, 1.8vw, .8rem);
+  letter-spacing: .02em;
+}
+html[lang="ja"] nav a {
+  min-width: 0;
+  padding-inline: 4px;
+  text-align: center;
+  line-height: 1.25;
+}
 html[lang="en"] .cover strong { font-size: clamp(1rem, 2.4vw, 2rem); letter-spacing: 0; }
 @media (max-width: 650px) {
   header > small { display: none; }
