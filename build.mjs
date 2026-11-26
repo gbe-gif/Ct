@@ -33,13 +33,15 @@ const bodies = {
   '': world,
   'leads/': shared + renderLeads(list),
   'support/': shared + renderSupport(list),
-  'gallery/': shared + renderGallery(),
+  'gallery/': shared + renderGallery(base),
+  'gallery/unsafe/': shared + renderGallery(base, true),
 }
-for (const [slug,title] of pages) {
+for (const [slug,title] of [...pages, ['gallery/unsafe/', '언세이프 수록 이미지']]) {
   const url = origin && new URL(base+slug,origin).href
   const name = title+' · 승전공'
   const body = bodies[slug]
-  const nav = pages.map(([s,t,icon])=>`<a href="${base+s}" ${slug===s?'aria-current="page"':''}><span aria-hidden="true">${icon}</span>${t}</a>`).join('')
+  const navSlug = slug === 'gallery/unsafe/' ? 'gallery/' : slug
+  const nav = pages.map(([s,t,icon])=>`<a href="${base+s}" ${navSlug===s?'aria-current="page"':''}><span aria-hidden="true">${icon}</span>${t}</a>`).join('')
   const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${name}</title><meta name="description" content="차밍고구마의 재테크 소모임 승전공. 일요일 오전 열 시, 서초 801호에서 만나는 사람들의 이야기."><meta property="og:type" content="website"><meta property="og:title" content="${name}">${url?`<link rel="canonical" href="${url}"><meta property="og:url" content="${url}">`:''}<link rel="stylesheet" href="${base}style.css"></head><body><header><a href="${base}"><b>승전공</b><span>소모임 기록실</span></a><small>서울 · 서초</small></header><main>${body}</main><nav aria-label="페이지 이동">${nav}</nav></body></html>`
   const dir = path.join(dest,slug)
   await mkdir(dir,{recursive:true})
@@ -52,7 +54,7 @@ for (const [slug,title] of pages) {
     </div>
     <form><label for="draft">당신의 메시지</label><div class="composer"><output id="draft">네. 저도 준비됐어요.</output><button type="submit">전송</button></div></form>
   </div></dialog>`
-  const pageScript = { '': 'spouse-picker.js', 'gallery/': 'gallery.js' }[slug]
+  const pageScript = { '': 'spouse-picker.js', 'gallery/': 'gallery.js', 'gallery/unsafe/': 'gallery.js' }[slug]
   const script = pageScript ? `<script src="${base}${pageScript}" defer></script>` : ''
-  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+script+`<script src="${base}chat.js" defer></script></body>`))
+  await writeFile(path.join(dir,'index.html'),html.replace('</body>',chat+`<script src="${base}chat.js" defer></script>`+script+'</body>'))
 }
