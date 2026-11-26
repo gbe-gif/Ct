@@ -153,3 +153,11 @@ dialog{width:min(91vw,440px);max-height:90dvh;padding:0;color:var(--ink);border:
     width: min(62%, 230px);
   }
 }
+.support-profile .profile-placeholder {
+  aspect-ratio: 1 / 1;
+}
+
+.profile-adult.profile-spoiler .profile-rating {
+  background: #e9dfec;
+  color: #492d4e;
+}

@@ -1,6 +1,7 @@
 import { mkdir, copyFile, cp, writeFile, rm } from 'node:fs/promises'
 import path from 'node:path'
 import { renderLeads } from './leads.mjs'
+import { renderSupport } from './support.mjs'
 
 const segments = (process.env.BASE_PATH || '').split('/').filter(Boolean).map(decodeURIComponent)
 if (segments.some(s => !/^[\p{L}\p{N}_-]+$/u.test(s))) throw Error('BASE_PATH에는 문자, 숫자, 밑줄, 하이픈만 사용해 주세요.')
@@ -23,12 +24,16 @@ await mkdir(dest,{recursive:true})
 await copyFile('style.css',path.join(dest,'style.css'))
 await copyFile('chat.js',path.join(dest,'chat.js'))
 await cp('fonts',path.join(dest,'fonts'),{recursive:true})
+const bodies = {
+  '': world,
+  'leads/': shared + renderLeads(list),
+  'support/': shared + renderSupport(list),
+  'gallery/': shared + '<h1>수록 이미지</h1>' + section('공개 예정', list('수록 이미지 공개 준비 중.')),
+}
 for (const [slug,title] of pages) {
   const url = origin && new URL(base+slug,origin).href
   const name = title+' · 승전공'
-  const body = slug === 'leads/'
-    ? shared + renderLeads(list)
-    : slug ? shared+'<h1>'+title+'</h1>'+section('공개 예정',list((slug==='gallery/'?'수록 이미지':'인물 소개')+' 공개 준비 중.')) : world
+  const body = bodies[slug]
   const nav = pages.map(([s,t,icon])=>`<a href="${base+s}" ${slug===s?'aria-current="page"':''}><span aria-hidden="true">${icon}</span>${t}</a>`).join('')
   const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${name}</title><meta name="description" content="차밍고구마의 재테크 소모임 승전공. 일요일 오전 열 시, 서초 801호에서 만나는 사람들의 이야기."><meta property="og:type" content="website"><meta property="og:title" content="${name}">${url?`<link rel="canonical" href="${url}"><meta property="og:url" content="${url}">`:''}<link rel="stylesheet" href="${base}style.css"></head><body><header><a href="${base}"><b>승전공</b><span>소모임 기록실</span></a><small>서울 · 서초</small></header><main>${body}</main><nav aria-label="페이지 이동">${nav}</nav></body></html>`
   const dir = path.join(dest,slug)
